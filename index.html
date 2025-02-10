@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TempusMMO Wiki</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+        }
+        .title-image {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
+        }
+        .navbar {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+        .navbar a {
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+        .gym-leaders {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+        .leader {
+            position: relative;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+            width: 180px;
+            text-align: center;
+            z-index: 1;
+        }
+        .leader:hover {
+            transform: scale(1.2);
+        }
+        .leader img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .leader-info {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #222;
+            padding: 10px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: left;
+            z-index: 10;
+        }
+        .leader.expanded .leader-info {
+            display: block;
+        }
+        .ace-pokemon {
+            position: relative;
+            display: inline-block;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .ace-pokemon img {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .ace-pokemon:hover img {
+            transform: scale(1.2);
+        }
+        .tooltip {
+            display: none;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+        .tooltip img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+        .ace-pokemon:hover .tooltip {
+            display: block;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let clickSound = new Audio("/mnt/data/Pokemon (A Button) - Sound Effect (HD).mp3");
+            function toggleInfo(id, leader) {
+                let infoBox = document.getElementById(id);
+                let isVisible = infoBox.style.display === "block";
+                
+                clickSound.currentTime = 0;
+                clickSound.play().catch(error => console.log("Audio play blocked: ", error));
+                
+                document.querySelectorAll(".leader-info").forEach(box => box.style.display = "none");
+                document.querySelectorAll(".leader").forEach(l => l.classList.remove("expanded"));
+                
+                if (!isVisible) {
+                    infoBox.style.display = "block";
+                    leader.classList.add("expanded");
+                }
+            }
+            window.toggleInfo = toggleInfo;
+        });
+    </script>
+</head>
+<body>
+    <img src="title-image.png" alt="Pokémon Wiki Title" class="title-image">
+    
+    <div class="navbar">
+        <a href="home">Home</a>
+        <a href="factions">Factions</a>
+        <a href="gymleaders">Gym Leaders</a>
+        <a href="elitefour">Elite Four</a>
+        <a href="champion">Champion</a>
+        <a href="map">Map</a>
+    </div>
+    
+    <h1>Tempus Region Gym Leaders</h1>
+    
+    <div class="gym-leaders">
+        <div class="leader" onclick="toggleInfo('normal-leader-info', this)">
+            <img src="./gymleaders/normal_gym_leader.png" alt="Normal Gym Leader">
+            <p>Reid - Normal Gym Leader</p>
+            <div id="normal-leader-info" class="leader-info">
+                <p><strong>Location:</strong> La Relance</p>
+                <p><strong>Biography:</strong> Reid was an apprentice working under the La Relance gym. After three years, the former gym leader suddenly went radio silent (coincidentally right when Reid was graduating) due to getting tired and old but not being able to find an external successor that fits the League's requirements.
+                    <br>
+                    <br>The League had difficulty selecting someone to fill the position, but were aware that there was an apprentice at the gym who has the experience and the unlikelihood they would leave anytime soon. 
+                    <br>
+                    <br>Thus, Reid was offered the position upon graduation and has been working there ever since. Reid accepted the offer as it allowed them to pursue their knowledge and growth without the needless worry of additional responsibilities. 
+                    <br>
+                    <br>Overall, Reid is very analytical and can often come accross as rude or selfish.</p>
+                <p><strong>Gym Affiliation:</strong> Normal Gym</p>
+                <p><strong>Ace Pokemon:</p>
+                <div class="ace-pokemon">
+                    <img src="./pokemon/ambipom.png" alt="Ambipom">
+                    <div class="tooltip">Ambipom <img src="./typeicons/normal_icon.png" alt="Normal Type"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="leader" onclick="toggleInfo('flying-leader-info', this)">
+            <img src="./gymleaders/flying_gym_leader.png" alt="Flying Gym Leader">
+            <p>Capt. Atlas - Flying Gym Leader</p>
+            <div id="flying-leader-info" class="leader-info">
+                <p><strong>Location:</strong> Venola</p>
+                <p><strong>Biography:</strong> A veteran air force pilot from Venola who became a commercial pilot in Tempus after his retirement. He is well known for his sharp decision-making and attention to detail while on the job and in battle. His ace is Swellow, the partner he had while in the Air Force.</p>
+                <p><strong>Gym Affiliation:</strong> Flying Gym</p>
+                <p><strong>Ace Pokemon:</p>
+                <div class="ace-pokemon">
+                    <img src="./pokemon/swellow.png" alt="Swellow">
+                    <div class="tooltip">Swellow <img src="./typeicons/flying_icon.png" alt="Flying Type"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
