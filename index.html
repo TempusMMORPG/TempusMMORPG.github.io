@@ -8,8 +8,10 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #000;
+            background: url('/mnt/data/background.png') no-repeat center center fixed;
+            background-size: cover;
             color: #fff;
+            text-shadow: 1px 1px 2px #000;
         }
         .title-image {
             width: 100%;
@@ -18,7 +20,7 @@
             object-fit: contain;
         }
         .navbar {
-            background-color: #444;
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 10px;
             text-align: center;
         }
@@ -56,10 +58,10 @@
             position: absolute;
             left: 100%;
             top: 0;
-            background-color: #222;
-            padding: 10px;
+            background-color: rgba(34, 34, 34, 0.95);
+            padding: 15px;
             border-radius: 10px;
-            width: 350px;
+            width: 400px;
             text-align: left;
             z-index: 10;
         }
@@ -108,13 +110,13 @@
             function toggleInfo(id, leader) {
                 let infoBox = document.getElementById(id);
                 let isVisible = infoBox.style.display === "block";
-                
+
                 clickSound.currentTime = 0;
                 clickSound.play().catch(error => console.log("Audio play blocked: ", error));
-                
+
                 document.querySelectorAll(".leader-info").forEach(box => box.style.display = "none");
                 document.querySelectorAll(".leader").forEach(l => l.classList.remove("expanded"));
-                
+
                 if (!isVisible) {
                     infoBox.style.display = "block";
                     leader.classList.add("expanded");
@@ -126,7 +128,7 @@
 </head>
 <body>
     <img src="title-image.png" alt="Pokémon Wiki Title" class="title-image">
-    
+
     <div class="navbar">
         <a href="home">Home</a>
         <a href="factions">Factions</a>
@@ -135,25 +137,31 @@
         <a href="champion">Champion</a>
         <a href="map">Map</a>
     </div>
-    
+
     <h1>Tempus Region Gym Leaders</h1>
-    
+
     <div class="gym-leaders">
         <div class="leader" onclick="toggleInfo('normal-leader-info', this)">
             <img src="./gymleaders/normal_gym_leader.png" alt="Normal Gym Leader">
             <p>Reid - Normal Gym Leader</p>
             <div id="normal-leader-info" class="leader-info">
                 <p><strong>Location:</strong> La Relance</p>
-                <p><strong>Biography:</strong> Reid was an apprentice working under the La Relance gym. [...]</p>
+                <p><strong>Biography:</strong> Reid was an apprenticeship working under the La Relance gym. After three years, the former gym leader suddenly went radio silent (coincidentally right when Reid was graduating) due to getting tired and old but not being able to find an external successor that fits the League's requirements.
+                    <br>
+                    <br>The League had difficulty selecting someone to fill the position, but were aware that there was an apprentice at the gym who has the experience and the unlikelihood they would leave anytime soon. 
+                    <br>
+                    <br>Thus, Reid was offered the position upon graduation and has been working there ever since. Reid accepted the offer as it allowed them to pursue their knowledge and growth without the needless worry of additional responsibilities. 
+                    <br>
+                    <br>Overall, Reid is analytical and has a rude and selfish personality.</p>
                 <p><strong>Gym Affiliation:</strong> Normal Gym</p>
                 <p><strong>Ace Pokemon:</p>
                 <div class="ace-pokemon">
                     <img src="./pokemon/ambipom.png" alt="Ambipom">
-                    <div class="tooltip">Ambipom <img src="./typeicons/normal_icon.png" alt="Normal Type"></div>
+                    <div class="tooltip"><img src="./typeicons/normal_icon.png" alt="Normal Type"></div>
                 </div>
             </div>
         </div>
-        
+
         <div class="leader" onclick="toggleInfo('flying-leader-info', this)">
             <img src="./gymleaders/flying_gym_leader.png" alt="Flying Gym Leader">
             <p>Capt. Atlas - Flying Gym Leader</p>
@@ -164,7 +172,7 @@
                 <p><strong>Ace Pokemon:</p>
                 <div class="ace-pokemon">
                     <img src="./pokemon/swellow.png" alt="Swellow">
-                    <div class="tooltip">Swellow <img src="./typeicons/flying_icon.png" alt="Flying Type"></div>
+                    <div class="tooltip"><img src="./typeicons/flying_icon.png" alt="Flying Type"></div>
                 </div>
             </div>
         </div>
